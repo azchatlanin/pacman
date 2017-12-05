@@ -158,8 +158,10 @@ document.body.appendChild(canvas)
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__rundomeFunc__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__randomFunc__ = __webpack_require__(5);
 
+
+let showEnemy = false
 
 /* harmony default export */ __webpack_exports__["a"] = ((ctx, canvas, player, enemy, powerdot, pscore, gscore, image) => {
   ctx.fillStyle = 'black'
@@ -169,9 +171,24 @@ document.body.appendChild(canvas)
   ctx.fillStyle = 'white'
   ctx.fillText(`Человек: ${pscore} Сопливчик: ${gscore}`, 2, 20)  
 
+  if (!showEnemy) {
+    enemy.pacX = Object(__WEBPACK_IMPORTED_MODULE_0__randomFunc__["a" /* default */])(5) * 64
+    enemy.speed = Object(__WEBPACK_IMPORTED_MODULE_0__randomFunc__["a" /* default */])(3)
+    enemy.x = Object(__WEBPACK_IMPORTED_MODULE_0__randomFunc__["a" /* default */])(canvas.width - 62)
+    enemy.y = Object(__WEBPACK_IMPORTED_MODULE_0__randomFunc__["a" /* default */])(canvas.height - 62)
+    showEnemy = true
+  } else {
+    ctx.fillStyle = '#ffff00'
+    ctx.beginPath()
+    ctx.arc(powerdot.x, powerdot.y, 8, -120, Math.PI * 2, true)
+    ctx.fill()
+  }
+
+
+
   if (enemy.moving <= 0) {
-    enemy.moving = Object(__WEBPACK_IMPORTED_MODULE_0__rundomeFunc__["a" /* default */])(10) * 3
-    enemy.speed = Object(__WEBPACK_IMPORTED_MODULE_0__rundomeFunc__["a" /* default */])(3)
+    enemy.moving = Object(__WEBPACK_IMPORTED_MODULE_0__randomFunc__["a" /* default */])(30) * 3
+    enemy.speed = Object(__WEBPACK_IMPORTED_MODULE_0__randomFunc__["a" /* default */])(3)
     enemy.dirX = 0
     enemy.dirY = 0
 

@@ -1,4 +1,6 @@
-import rundomeFunc from './rundomeFunc'
+import randomFunc from './randomFunc'
+
+let showEnemy = false
 
 export default (ctx, canvas, player, enemy, powerdot, pscore, gscore, image) => {
   ctx.fillStyle = 'black'
@@ -8,9 +10,24 @@ export default (ctx, canvas, player, enemy, powerdot, pscore, gscore, image) => 
   ctx.fillStyle = 'white'
   ctx.fillText(`Человек: ${pscore} Сопливчик: ${gscore}`, 2, 20)  
 
+  if (!showEnemy) {
+    enemy.pacX = randomFunc(5) * 64
+    enemy.speed = randomFunc(3)
+    enemy.x = randomFunc(canvas.width - 62)
+    enemy.y = randomFunc(canvas.height - 62)
+    showEnemy = true
+  } else {
+    ctx.fillStyle = '#ffff00'
+    ctx.beginPath()
+    ctx.arc(powerdot.x, powerdot.y, 8, 0, Math.PI * 2, true)
+    ctx.fill()
+  }
+
+
+
   if (enemy.moving <= 0) {
-    enemy.moving = rundomeFunc(30) * 3
-    enemy.speed = rundomeFunc(3)
+    enemy.moving = randomFunc(30) * 3
+    enemy.speed = randomFunc(3)
     enemy.dirX = 0
     enemy.dirY = 0
 
