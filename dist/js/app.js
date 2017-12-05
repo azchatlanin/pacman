@@ -95,6 +95,15 @@ const data = {
   gscore: 0
 }
 
+const keyClick = {}
+document.addEventListener('keydown', (event) => {
+  keyClick[event.keyCode] = true  
+})
+
+document.addEventListener('keyup', (event) => {
+  delete keyClick[event.keyCode]  
+})
+
 const resizeCanvas = () => {
   canvas.height = window.innerHeight
   canvas.width = window.innerWidth
@@ -137,7 +146,7 @@ document.body.appendChild(canvas)
   y: 30,
   pacX: 320,
   pacY: 0,
-  size: 122,
+  size: 32,
   speed: 5
 });
 
@@ -154,8 +163,8 @@ document.body.appendChild(canvas)
   ctx.fillStyle = 'white'
   ctx.fillText(`Человек: ${pscore} Сопливчик: ${gscore}`, 2, 20)  
 
-  ctx.drawImage(image, player.pacX, player.pacY, 32, 32, player.x, player.y, player.size, player.size);
-  
+  ctx.drawImage(image, player.pacX, player.pacY, 32, 32, player.x, player.y, player.size, player.size)
+  ctx.drawImage(image, enemy.pacX, enemy.pacY, 32, 32, enemy.x, enemy.y, enemy.size, enemy.size)  
 }); 
 
 /***/ })

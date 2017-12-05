@@ -6,6 +6,6 @@ export default (ctx, canvas, player, enemy, powerdot, pscore, gscore, image) => 
   ctx.fillStyle = 'white'
   ctx.fillText(`Человек: ${pscore} Сопливчик: ${gscore}`, 2, 20)  
 
-  ctx.drawImage(image, player.pacX, player.pacY, 32, 32, player.x, player.y, player.size, player.size);
-  
+  ctx.drawImage(image, player.pacX, player.pacY, 32, 32, player.x, player.y, player.size, player.size)
+  ctx.drawImage(image, enemy.pacX, enemy.pacY, 32, 32, enemy.x, enemy.y, enemy.size, enemy.size)  
 } 

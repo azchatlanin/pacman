@@ -20,6 +20,15 @@ const data = {
   gscore: 0
 }
 
+const keyClick = {}
+document.addEventListener('keydown', (event) => {
+  keyClick[event.keyCode] = true  
+})
+
+document.addEventListener('keyup', (event) => {
+  delete keyClick[event.keyCode]  
+})
+
 const resizeCanvas = () => {
   canvas.height = window.innerHeight
   canvas.width = window.innerWidth
