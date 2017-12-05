@@ -15,4 +15,11 @@ export default (keyClick, player, canvas) => {
     player.y += player.speed
     player.pacY = 32
   }
+
+  if (player.x >= canvas.width + 1) { player.x = -20 }
+  if (player.x <= -30) { player.x = canvas.width }
+  if (player.y <= -30) { player.y = canvas.height }
+  if (player.y >= canvas.height + 1) { player.y = -20 }
+
+  player.pacX = player.pacX === 320 ? 352 : 320
 }
