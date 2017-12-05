@@ -73,6 +73,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pers_powerdot__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pers_player__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lib_render__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__lib_move__ = __webpack_require__(5);
+
 
 
 
@@ -98,6 +100,7 @@ const data = {
 const keyClick = {}
 document.addEventListener('keydown', (event) => {
   keyClick[event.keyCode] = true  
+  Object(__WEBPACK_IMPORTED_MODULE_4__lib_move__["a" /* default */])(keyClick, __WEBPACK_IMPORTED_MODULE_2__pers_player__["a" /* default */], canvas)
 })
 
 document.addEventListener('keyup', (event) => {
@@ -166,6 +169,30 @@ document.body.appendChild(canvas)
   ctx.drawImage(image, player.pacX, player.pacY, 32, 32, player.x, player.y, player.size, player.size)
   ctx.drawImage(image, enemy.pacX, enemy.pacY, 32, 32, enemy.x, enemy.y, enemy.size, enemy.size)  
 }); 
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ((keyClick, player, canvas) => {
+  if (37 in keyClick) {
+    player.x -= player.speed
+    player.pacY = 64
+  }
+  if (38 in keyClick) {
+    player.y -= player.speed
+    player.pacY = 96
+  }
+  if (39 in keyClick) {
+    player.x += player.speed
+    player.pacY = 0
+  }
+  if (40 in keyClick) {
+    player.y += player.speed
+    player.pacY = 32
+  }
+});
 
 /***/ })
 /******/ ]);

@@ -2,6 +2,7 @@ import Enemy from './pers/enemy'
 import powerdot from './pers/powerdot'
 import player from './pers/player'
 import render from './lib/render'
+import move from './lib/move'
 
 const canvas = document.createElement('canvas')
 const ctx = canvas.getContext('2d')
@@ -23,6 +24,7 @@ const data = {
 const keyClick = {}
 document.addEventListener('keydown', (event) => {
   keyClick[event.keyCode] = true  
+  move(keyClick, player, canvas)
 })
 
 document.addEventListener('keyup', (event) => {
