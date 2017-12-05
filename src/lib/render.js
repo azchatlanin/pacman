@@ -10,6 +10,20 @@ export default (ctx, canvas, player, enemy, powerdot, pscore, gscore, image) => 
   ctx.fillStyle = 'white'
   ctx.fillText(`Человек: ${pscore} Сопливчик: ${gscore}`, 2, 20)  
 
+  if (player.x <= powerdot.x && player.y <= powerdot.y && powerdot.x <= player.x + 20 && powerdot.y <= player.y + 20) {
+    powerdot.powerup = false
+    powerdot.pcountdoun = 500
+    powerdot.ghostNum = enemy.pacX    
+    enemy.pacX = 384
+    powerdot.ghosteat = true
+  }
+
+  if (!powerdot.powerup) {
+    powerdot.x = randomFunc(canvas.width - 62)
+    powerdot.y = randomFunc(canvas.height - 62)
+    powerdot.powerup = true
+  }
+
   if (!showEnemy) {
     enemy.pacX = randomFunc(5) * 64
     enemy.speed = randomFunc(3)
@@ -22,8 +36,6 @@ export default (ctx, canvas, player, enemy, powerdot, pscore, gscore, image) => 
     ctx.arc(powerdot.x, powerdot.y, 8, 0, Math.PI * 2, true)
     ctx.fill()
   }
-
-
 
   if (enemy.moving <= 0) {
     enemy.moving = randomFunc(30) * 3

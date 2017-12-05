@@ -133,7 +133,7 @@ document.body.appendChild(canvas)
 /* harmony default export */ __webpack_exports__["a"] = ({
   x: 110,
   y: 310,
-  powerUp: false,
+  powerup: false,
   pcountdoun: 0,
   ghostNum: 0,
   ghosteat: false
@@ -171,6 +171,20 @@ let showEnemy = false
   ctx.fillStyle = 'white'
   ctx.fillText(`Человек: ${pscore} Сопливчик: ${gscore}`, 2, 20)  
 
+  if (player.x <= powerdot.x && player.y <= powerdot.y && powerdot.x <= player.x + 20 && powerdot.y <= player.y + 20) {
+    powerdot.powerup = false
+    powerdot.pcountdoun = 500
+    powerdot.ghostNum = enemy.pacX    
+    enemy.pacX = 384
+    powerdot.ghosteat = true
+  }
+
+  if (!powerdot.powerup) {
+    powerdot.x = Object(__WEBPACK_IMPORTED_MODULE_0__randomFunc__["a" /* default */])(canvas.width - 62)
+    powerdot.y = Object(__WEBPACK_IMPORTED_MODULE_0__randomFunc__["a" /* default */])(canvas.height - 62)
+    powerdot.powerup = true
+  }
+
   if (!showEnemy) {
     enemy.pacX = Object(__WEBPACK_IMPORTED_MODULE_0__randomFunc__["a" /* default */])(5) * 64
     enemy.speed = Object(__WEBPACK_IMPORTED_MODULE_0__randomFunc__["a" /* default */])(3)
@@ -180,11 +194,9 @@ let showEnemy = false
   } else {
     ctx.fillStyle = '#ffff00'
     ctx.beginPath()
-    ctx.arc(powerdot.x, powerdot.y, 8, -120, Math.PI * 2, true)
+    ctx.arc(powerdot.x, powerdot.y, 8, 0, Math.PI * 2, true)
     ctx.fill()
   }
-
-
 
   if (enemy.moving <= 0) {
     enemy.moving = Object(__WEBPACK_IMPORTED_MODULE_0__randomFunc__["a" /* default */])(30) * 3
