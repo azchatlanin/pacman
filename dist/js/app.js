@@ -81,6 +81,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 const canvas = document.createElement('canvas')
 const ctx = canvas.getContext('2d')
 
+const image = new Image()
+image.src = 'img/pac.png'
+image.onload = () => {
+  window.addEventListener('resize', resizeCanvas, false)
+  resizeCanvas()
+}
+
 const enemy = Object(__WEBPACK_IMPORTED_MODULE_0__pers_enemy__["a" /* default */])()
 
 const data = {
@@ -91,11 +98,9 @@ const data = {
 const resizeCanvas = () => {
   canvas.height = window.innerHeight
   canvas.width = window.innerWidth
-  Object(__WEBPACK_IMPORTED_MODULE_3__lib_render__["a" /* default */])(ctx, canvas, __WEBPACK_IMPORTED_MODULE_2__pers_player__["a" /* default */], enemy, __WEBPACK_IMPORTED_MODULE_1__pers_powerdot__["a" /* default */], data.pscore, data.gscore)
+  Object(__WEBPACK_IMPORTED_MODULE_3__lib_render__["a" /* default */])(ctx, canvas, __WEBPACK_IMPORTED_MODULE_2__pers_player__["a" /* default */], enemy, __WEBPACK_IMPORTED_MODULE_1__pers_powerdot__["a" /* default */], data.pscore, data.gscore, image)
   requestAnimationFrame(resizeCanvas)
 }
-
-resizeCanvas()
 
 document.body.appendChild(canvas)
 
@@ -132,7 +137,7 @@ document.body.appendChild(canvas)
   y: 30,
   pacX: 320,
   pacY: 0,
-  size: 32,
+  size: 122,
   speed: 5
 });
 
@@ -141,13 +146,16 @@ document.body.appendChild(canvas)
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony default export */ __webpack_exports__["a"] = ((ctx, canvas, player, enemy, powerdot, pscore, gscore) => {
+/* harmony default export */ __webpack_exports__["a"] = ((ctx, canvas, player, enemy, powerdot, pscore, gscore, image) => {
   ctx.fillStyle = 'black'
   ctx.fillRect(0, 0, canvas.width, canvas.height)
   ctx.font = '20px Verbana'
 
   ctx.fillStyle = 'white'
   ctx.fillText(`Человек: ${pscore} Сопливчик: ${gscore}`, 2, 20)  
+
+  ctx.drawImage(image, player.pacX, player.pacY, 32, 32, player.x, player.y, player.size, player.size);
+  
 }); 
 
 /***/ })
