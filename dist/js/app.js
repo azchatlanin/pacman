@@ -179,6 +179,15 @@ let showEnemy = false
     powerdot.ghosteat = true
   }
 
+  if (powerdot.ghosteat) {
+    powerdot.pcountdoun--
+    if (powerdot.pcountdoun <=0) {
+      powerdot.ghosteat = false
+      enemy.pacX = powerdot.ghostNum
+      enemy.speed = Object(__WEBPACK_IMPORTED_MODULE_0__randomFunc__["a" /* default */])(3)
+    }
+  }
+
   if (!powerdot.powerup) {
     powerdot.x = Object(__WEBPACK_IMPORTED_MODULE_0__randomFunc__["a" /* default */])(canvas.width - 62)
     powerdot.y = Object(__WEBPACK_IMPORTED_MODULE_0__randomFunc__["a" /* default */])(canvas.height - 62)
@@ -204,6 +213,7 @@ let showEnemy = false
     enemy.dirX = 0
     enemy.dirY = 0
 
+    if (powerdot.ghosteat) { enemy.speed = enemy.speed * -1 }
     if (enemy.moving % 2) {
       enemy.dirX = player.x < enemy.x ? -enemy.speed : enemy.speed
     } else {

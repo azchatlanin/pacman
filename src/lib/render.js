@@ -18,6 +18,15 @@ export default (ctx, canvas, player, enemy, powerdot, pscore, gscore, image) => 
     powerdot.ghosteat = true
   }
 
+  if (powerdot.ghosteat) {
+    powerdot.pcountdoun--
+    if (powerdot.pcountdoun <=0) {
+      powerdot.ghosteat = false
+      enemy.pacX = powerdot.ghostNum
+      enemy.speed = randomFunc(3)
+    }
+  }
+
   if (!powerdot.powerup) {
     powerdot.x = randomFunc(canvas.width - 62)
     powerdot.y = randomFunc(canvas.height - 62)
@@ -43,6 +52,7 @@ export default (ctx, canvas, player, enemy, powerdot, pscore, gscore, image) => 
     enemy.dirX = 0
     enemy.dirY = 0
 
+    if (powerdot.ghosteat) { enemy.speed = enemy.speed * -1 }
     if (enemy.moving % 2) {
       enemy.dirX = player.x < enemy.x ? -enemy.speed : enemy.speed
     } else {
