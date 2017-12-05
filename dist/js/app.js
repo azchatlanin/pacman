@@ -73,7 +73,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pers_powerdot__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pers_player__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lib_render__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__lib_move__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__lib_move__ = __webpack_require__(6);
 
 
 
@@ -121,8 +121,8 @@ document.body.appendChild(canvas)
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony default export */ __webpack_exports__["a"] = ((x = 110, y = 310, pacX = 0, pacY = 0, size = 32,  dirX = 0, dirY = 0, speed = 5) => {
-  return { x, y, pacX, pacY, size,  dirX, dirY, speed }
+/* harmony default export */ __webpack_exports__["a"] = ((x = 110, y = 310, pacX = 0, pacY = 0, size = 32,  moving = 0, dirX = 0, dirY = 0, speed = 5) => {
+  return { x, y, pacX, pacY, size, moving, dirX, dirY, speed }
 });
 
 /***/ }),
@@ -158,6 +158,9 @@ document.body.appendChild(canvas)
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__rundomeFunc__ = __webpack_require__(5);
+
+
 /* harmony default export */ __webpack_exports__["a"] = ((ctx, canvas, player, enemy, powerdot, pscore, gscore, image) => {
   ctx.fillStyle = 'black'
   ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -166,12 +169,38 @@ document.body.appendChild(canvas)
   ctx.fillStyle = 'white'
   ctx.fillText(`Человек: ${pscore} Сопливчик: ${gscore}`, 2, 20)  
 
+  if (enemy.moving <= 0) {
+    enemy.moving = Object(__WEBPACK_IMPORTED_MODULE_0__rundomeFunc__["a" /* default */])(10) * 3
+    enemy.speed = Object(__WEBPACK_IMPORTED_MODULE_0__rundomeFunc__["a" /* default */])(3)
+    enemy.dirX = 0
+    enemy.dirY = 0
+
+    if (enemy.moving % 2) {
+      enemy.dirX = player.x < enemy.x ? -enemy.speed : enemy.speed
+    } else {
+      enemy.dirY = player.y < enemy.y ? -enemy.speed : enemy.speed
+    }
+  }
+  enemy.moving--
+  enemy.x += enemy.dirX
+  enemy.y += enemy.dirY
+  enemy.pacY = enemy.pacY === 0 ? enemy.pacY = 32 : enemy.pacY = 0
+
   ctx.drawImage(image, player.pacX, player.pacY, 32, 32, player.x, player.y, player.size, player.size)
   ctx.drawImage(image, enemy.pacX, enemy.pacY, 32, 32, enemy.x, enemy.y, enemy.size, enemy.size)  
 }); 
 
 /***/ }),
 /* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ((n) => {
+  return Math.floor(Math.random() * n)
+});
+
+/***/ }),
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
