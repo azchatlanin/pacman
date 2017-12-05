@@ -8,7 +8,20 @@ export default (ctx, canvas, player, enemy, powerdot, pscore, gscore, image) => 
   ctx.font = '20px Verbana'
 
   ctx.fillStyle = 'white'
-  ctx.fillText(`Человек: ${pscore} Сопливчик: ${gscore}`, 2, 20)  
+  ctx.fillText(`Человек: ${pscore} Сопливчик: ${gscore}`, 2, 20) 
+
+  if (player.x <= enemy.x + 12 && player.y <= enemy.y + 32 && enemy.x <= player.x + 12 && enemy.y <= player.y + 32) {
+    if (powerdot.ghosteat) {
+      pscore++
+    } else {
+      gscore++
+    }
+    enemy.x = randomFunc(canvas.width - 64)
+    enemy.y = randomFunc(canvas.height - 64)
+    player.x = 10
+    player.y = 30
+    powerdot.pcountdown = 0
+  }
 
   if (player.x <= powerdot.x && player.y <= powerdot.y && powerdot.x <= player.x + 20 && powerdot.y <= player.y + 20) {
     powerdot.powerup = false
@@ -53,6 +66,7 @@ export default (ctx, canvas, player, enemy, powerdot, pscore, gscore, image) => 
     enemy.dirY = 0
 
     if (powerdot.ghosteat) { enemy.speed = enemy.speed * -1 }
+
     if (enemy.moving % 2) {
       enemy.dirX = player.x < enemy.x ? -enemy.speed : enemy.speed
     } else {
@@ -65,5 +79,7 @@ export default (ctx, canvas, player, enemy, powerdot, pscore, gscore, image) => 
   enemy.pacY = enemy.pacY === 0 ? enemy.pacY = 32 : enemy.pacY = 0
 
   ctx.drawImage(image, player.pacX, player.pacY, 32, 32, player.x, player.y, player.size, player.size)
-  ctx.drawImage(image, enemy.pacX, enemy.pacY, 32, 32, enemy.x, enemy.y, enemy.size, enemy.size)  
+  ctx.drawImage(image, enemy.pacX, enemy.pacY, 32, 32, enemy.x, enemy.y, enemy.size, enemy.size)
+  
+  return { pscore, gscore }
 } 

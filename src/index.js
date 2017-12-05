@@ -16,7 +16,7 @@ image.onload = () => {
 
 const enemy = Enemy()
 
-const data = {
+let data = {
   pscore: 0,
   gscore: 0
 }
@@ -34,7 +34,7 @@ document.addEventListener('keyup', (event) => {
 const resizeCanvas = () => {
   canvas.height = window.innerHeight
   canvas.width = window.innerWidth
-  render(ctx, canvas, player, enemy, powerdot, data.pscore, data.gscore, image)
+  data = render(ctx, canvas, player, enemy, powerdot, data.pscore, data.gscore, image)
   requestAnimationFrame(resizeCanvas)
 }
 
