@@ -3,7 +3,7 @@ require('babel-register')
 const ora = require('ora')
 const chalk = require('chalk')
 const webpack = require('webpack')
-const config = require('./webpack.config')
+const config = require('./webpack.config').default
 
 const spinner = ora('building...')
 spinner.start()
